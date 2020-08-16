@@ -1,0 +1,56 @@
+---
+title: "CaseStudy2DDS"
+author: "Clifford"
+date: "8/15/2020"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+```
+```{r}
+ggplot(data=CaseStudy2DDS,aes(fill=Attrition))+
+  geom_histogram(mapping = aes(x=HourlyRate))+
+  facet_grid(Attrition~Department)
+```
+```{r}
+ggplot(data=CaseStudy2DDS)+
+  geom_smooth(mapping=aes(x=HourlyRate,y=PercentSalaryHike, linetype=Attrition,color=Attrition))+
+  ggtitle("Hourly Rate v Perent Salary Hike") + xlab("Hourly Rate")+ylab("Percent Salary Hike")
+```
+
+```{r}
+ggplot(data=CaseStudy2DDS)+
+  geom_point(mapping = aes(x=HourlyRate,y=PercentSalaryHike, color=Department))+
+  geom_smooth(mapping=aes(x=HourlyRate,y=PercentSalaryHike, linetype=Attrition,color=Attrition))+
+  ggtitle("Hourly Rate v Perent Salary Hike") + xlab("Hourly Rate")+ylab("Percent Salary Hike")
+```
+
+```{r}
+#Transformation
+CaseStudy2DDS %>% ggplot(aes(x=Department)) + geom_bar(stat="count")
+
+CaseStudy2DDS %>% ggplot(aes(x=Attrition,fill=DistanceFromHome)) + geom_bar()+theme_excel()
+
+# Assuming we want to keep all the employees with Job satisfaction <= 1
+```
+
+```{r}
+result = CaseStudy2DDS %>% filter(JobSatisfaction <=1)
+result
+```
+
+```{r}
+CaseStudy2DDS %>% ggplot(aes(x=HourlyRate,color=Department))+ geom_freqpoly()
+
+```
+
+```{r}
+
+CaseStudy2DDS %>% ggplot(aes(y=HourlyRate,color=Department))+ geom_boxplot()
+```
+
+```{r}
+CaseStudy2DDS %>% ggplot(aes(x=DistanceFromHome,color=Attrition))+ geom_histogram()+ facet_grid(rows=vars(Attrition))
+```
+```
